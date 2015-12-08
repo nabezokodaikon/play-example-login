@@ -19,7 +19,7 @@ lazy val commonSettings = Seq(
 lazy val root = (project.in(file(".")))
   .settings(commonSettings: _*)
   .settings(
-    name := "play-login",
+    name := "play-example-login",
     resolvers ++= {
       Seq(
       )
