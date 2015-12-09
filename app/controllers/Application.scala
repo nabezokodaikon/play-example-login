@@ -13,18 +13,30 @@ class Application extends Controller {
   val loginForm = Form(
     mapping(
       "email" -> text,
-      "password" -> text)(User.apply)(User.unapply))
+      "password" -> text
+    )(User.apply)(User.unapply)
+  )
 
   def login() = Action {
-    val filledForm = loginForm.fill(User("E-mail Address", "Password"))
-    Ok(views.html.login(filledForm))
+    // val filledForm = loginForm.fill(User("E-mail Address", "Password"))
+
+    val b = loginForm.bind(Map("email" -> "example.com", "password" -> "pass"))
+    println(b.toString)
+
+    Ok(views.html.login("hello"))
   }
 
   def auth() = Action { implicit request =>
+
+    val b = request.body
+    println(b.toString)
+
+
+
     loginForm.bindFromRequest.fold(
       errors => {
         println(errors)
-        Redirect(routes.Application.login())
+        BadRequest(errors.toString)
       },
       success => {
         println("Success!")

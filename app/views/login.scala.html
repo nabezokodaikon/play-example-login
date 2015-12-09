@@ -1,4 +1,4 @@
-@(userForm: Form[User])(implicit messages: Messages)
+@(message: String)
 
 <!DOCTYPE html>
 <html>
@@ -7,28 +7,10 @@
         <title>ログイン</title>
     </head>
     <body>
-        @helper.form(action = routes.Application.auth) {
-        <!-- <form action="./auth" method="POST"> -->
-            @helper.inputText(userForm("email"))
-            @helper.inputText(userForm("password"))
-            <!-- <dl> -->
-                <!-- <dt> -->
-                    <!-- <label for="email">E-mail</label> -->
-                <!-- </dt> -->
-                <!-- <dd> -->
-                    <!-- <input type="text" id="email"> -->
-                <!-- </dd> -->
-            <!-- </dl> -->
-            <!-- <dl> -->
-                <!-- <dt> -->
-                    <!-- <label for="password">Password</label> -->
-                <!-- </dt> -->
-                <!-- <dd> -->
-                    <!-- <input type="text" id="password"> -->
-                <!-- </dd> -->
-            <!-- </dl> -->
+        <form action="/auth" method="post">
+            <input type="text" id="email">
+            <input type="text" id="password">
             <input type="submit" value="ログイン">
-        <!-- </form> -->
-        }
+        </form>
     </body>
 </html>
