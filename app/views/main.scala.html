@@ -1,0 +1,16 @@
+@(user: User)
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>ログイン中</title>
+    </head>
+    <body>
+        <p>ログイン中</p>
+        <p>E-mail: @user.email</p>
+        <form action="/logout" method="post">
+            <input type="submit" value="ログアウト">
+        </form>
+    </body>
+</html>

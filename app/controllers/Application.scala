@@ -1,33 +1,41 @@
 package controllers
 
+import scala.concurrent.Future
+import scala.concurrent.ExecutionContext.Implicits.global
 import play.api._
 import play.api.mvc._
 import play.api.data._
 import play.api.data.Forms._
 import play.api.Play.current
 import play.api.i18n.Messages.Implicits._
-import models.User
+import jp.t2v.lab.play2.auth.LoginLogout
+import models._
 
-class Application extends Controller {
+class Application extends Controller with LoginLogout with AuthConfigImpl {
 
   val loginForm = Form(
     mapping(
-      "email" -> text,
+      "email" -> email,
       "password" -> text
-    )(User.apply)(User.unapply)
+    )(User.authenticate)(_.map(user => (user.email, "")))
+      .verifying("Invalid email or password", result => result.isDefined)
   )
 
   def login() = Action {
     Ok(views.html.login())
   }
 
-  def auth() = Action { implicit request =>
+  def logout() = Action.async { implicit request =>
+    gotoLogoutSucceeded
+  }
+
+  def authenticate = Action.async { implicit request =>
     loginForm.bindFromRequest.fold(
-      errors => {
-        BadRequest(errors.toString)
+      formWithErrors => {
+        Future.successful(BadRequest(views.html.login()))
       },
-      success => {
-        Ok(success.toString)
+      user => {
+        gotoLoginSucceeded(user.get.email)
       }
     )
   }

@@ -29,6 +29,7 @@ lazy val root = (project.in(file(".")))
         // play2-auth
         "jp.t2v" %% "play2-auth"        % "0.14.1",
         "jp.t2v" %% "play2-auth-test"   % "0.14.1" % "test",
+         play.sbt.Play.autoImport.cache,
 
         // Test
         "org.scalatest" % "scalatest_2.11" % "2.2.4" % "test",
