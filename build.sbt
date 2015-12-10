@@ -26,6 +26,10 @@ lazy val root = (project.in(file(".")))
     },
     libraryDependencies ++= {
       Seq(
+        // play2-auth
+        "jp.t2v" %% "play2-auth"        % "0.14.1",
+        "jp.t2v" %% "play2-auth-test"   % "0.14.1" % "test",
+
         // Test
         "org.scalatest" % "scalatest_2.11" % "2.2.4" % "test",
         "org.scalacheck" %% "scalacheck" % "1.12.5" % "test"
