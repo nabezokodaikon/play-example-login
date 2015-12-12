@@ -13,4 +13,9 @@ class Index extends Controller with AuthElement with AuthConfigImpl {
     val user = loggedIn
     Ok(views.html.main(user))
   }
+
+  def sub() = StackAction(AuthorityKey -> Administrator) { implicit request =>
+    val user = loggedIn
+    Ok(views.html.sub(user))
+  }
 }

@@ -5,8 +5,9 @@
 # Home page
 GET     /                           controllers.Application.login
 POST    /auth                       controllers.Application.authenticate
-GET     /index                      controllers.Index.main
 POST    /logout                     controllers.Application.logout
+GET     /index                      controllers.Index.main
+GET     /sub                        controllers.Index.sub
 
 
 # Map static resources from the /public folder to the /assets URL path
